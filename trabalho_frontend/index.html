@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engenharia de Software</title>
+</head>
+
+<body>
+<div id="cabecalho">
+    <h1>Ciclo de Vida de Software</h1>
+    <hr>
+    <ul>
+        <li><a href="#introducao">Introdução</a></li>
+        <li><a href="#modelos-tradicionais">Modelos Tradicionais</a></li>
+        <li><a href="#ageis">Modelos Ágeis</a></li>
+        <li><a href="#comparacao">Comparação</a></li>
+        <li><a href="#conclusao">O que aprendemos?</a></li>
+        <li><a href="#formulario">Formulário</a></li>
+    </ul>
+    <hr>
+</div>
+
+<div id="introducao">
+    <h2>Entendendo o Ciclo de Vida de Software</h2>
+    <p>O Ciclo de Vida de Software representa a estrutura que orienta todas as etapas necessárias para desenvolver um sistema, desde a identificação da necessidade até sua manutenção após a entrega. Ele não define apenas “o que fazer”, mas principalmente “como organizar” o desenvolvimento para reduzir riscos, controlar prazos e garantir qualidade.</p>
+    <p>Ao longo da evolução da Engenharia de Software, diferentes modelos foram propostos para lidar com desafios como mudanças de requisitos, complexidade técnica e necessidade de validação constante. Esses modelos podem ser classificados em abordagens tradicionais e abordagens modernas.</p>
+</div>
+
+<div id="abordagens">
+    <h2>Principais Abordagens de Desenvolvimento</h2>
+    <p>Entre os modelos mais relevantes na área, destacam-se:</p>
+
+    <ul>
+        <li>Modelo Cascata</li>
+        <li>Modelo em V</li>
+        <li>Modelo Incremental</li>
+        <li>Modelo Espiral</li>
+        <li>Metodologias Ágeis (Scrum e Kanban)</li>
+    </ul>
+
+    <p>Cada um desses modelos surgiu em um contexto específico e apresenta vantagens e limitações que impactam diretamente o andamento de um projeto.</p>
+</div>
+
+<div id="modelos-tradicionais">
+    <h2>Modelos Tradicionais</h2>
+    <hr>
+
+    <h3 id="cascata">Modelo Cascata</h3>
+    <img src="cascata.jpg" alt="Modelo Cascata" width=600>
+    <p>O Modelo Cascata é uma das primeiras abordagens estruturadas de desenvolvimento de software. Ele organiza o projeto de forma linear e sequencial, em etapas bem definidas como levantamento de requisitos, análise, projeto, implementação, testes e manutenção.</p>
+    <p>A principal característica desse modelo é a conclusão total de uma fase antes do início da próxima. Isso favorece documentação detalhada e planejamento rigoroso. No entanto, essa rigidez dificulta adaptações caso surjam mudanças nos requisitos durante o desenvolvimento.</p>
+    <p>É mais indicado para projetos com escopo bem definido e baixa incerteza.</p>
+
+    <h3 id="modelo-v">Modelo em V</h3>
+    <img src="modelo_V.png" alt="Modelo em V" width=600>
+    <p>O Modelo em V pode ser considerado uma evolução do Cascata. Sua principal diferença está na forte ênfase em verificação e validação. Para cada fase de desenvolvimento existe uma fase correspondente de teste, planejada desde o início do projeto.</p>
+    <p>Por exemplo, requisitos estão ligados a testes de aceitação, enquanto o projeto detalhado se relaciona com testes unitários e de integração. Essa estrutura aumenta o controle de qualidade e reduz falhas detectadas apenas no final do processo.</p>
+    <p>É amplamente utilizado em sistemas críticos.</p>
+
+    <h3 id="incremental">Modelo Incremental</h3>
+    <img src="incremental.png" alt="Modelo Incremental" width=600>
+    <p>O Modelo Incremental organiza o desenvolvimento do sistema em partes menores chamadas incrementos.</p>
+    <p>Cada incremento representa uma versão funcional do software.</p>
+    <p>Permite validação contínua e maior flexibilidade em relação ao modelo sequencial.</p>
+
+    <h3 id="espiral">Modelo Espiral</h3>
+    <img src="espiral.png" alt="Modelo Espiral" width=600>
+    <p>O Modelo Espiral é estruturado em ciclos sucessivos.</p>
+    <p>Em cada ciclo são realizadas atividades de planejamento, análise de riscos, desenvolvimento e avaliação.</p>
+    <p>É indicado para projetos complexos e de grande porte.</p>
+</div>
+
+<div id="ageis">
+    <h2>Modelos Modernos/Ágeis</h2>
+    <hr>
+    <img src="ageis.png" alt="Metodologias Ágeis" width=600>
+    <p>Com o aumento da necessidade de adaptação rápida às mudanças, surgiram as metodologias ágeis.</p>
+    <p>O Scrum utiliza sprints curtos, enquanto o Kanban organiza o fluxo de tarefas visualmente.</p>
+    <p>São indicadas para ambientes dinâmicos.</p>
+</div>
+
+<div id="comparacao">
+    <h2>Comparação entre os Modelos</h2>
+    <p>A tabela abaixo apresenta uma comparação entre os principais modelos.</p>
+
+    <table border="1">
+        <tr>
+            <th>Modelo</th>
+            <th>Flexibilidade</th>
+            <th>Controle de Risco</th>
+            <th>Complexidade de Gestão</th>
+            <th>Documentação</th>
+        </tr>
+        <tr>
+            <td>Cascata</td>
+            <td>Baixa</td>
+            <td>Baixo</td>
+            <td>Baixa</td>
+            <td>Alta</td>
+        </tr>
+        <tr>
+            <td>Modelo em V</td>
+            <td>Baixa</td>
+            <td>Médio</td>
+            <td>Média</td>
+            <td>Alta</td>
+        </tr>
+        <tr>
+            <td>Incremental</td>
+            <td>Média</td>
+            <td>Médio</td>
+            <td>Média</td>
+            <td>Média</td>
+        </tr>
+        <tr>
+            <td>Espiral</td>
+            <td>Alta</td>
+            <td>Alto</td>
+            <td>Alta</td>
+            <td>Média</td>
+        </tr>
+        <tr>
+            <td>Ágil</td>
+            <td>Alta</td>
+            <td>Médio</td>
+            <td>Média</td>
+            <td>Baixa</td>
+        </tr>
+    </table>
+</div>
+
+<div id="conclusao">
+    <h2>O que aprendemos?</h2>
+    <p>Os modelos de ciclo de vida refletem a evolução da Engenharia de Software.</p>
+    <p>A escolha depende da natureza do projeto e do nível de risco.</p>
+</div>
+
+<div id="formulario">
+    <h2>Formulário de Avaliação</h2>
+
+    <form>
+        <label for="nome">Nome:</label><br>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="modelo">Modelo que você considera mais adequado:</label><br>
+        <select id="modelo" name="modelo">
+            <option>Cascata</option>
+            <option>Modelo em V</option>
+            <option>Incremental</option>
+            <option>Espiral</option>
+            <option>Ágil</option>
+        </select><br><br>
+
+        <label for="comentario">Comentário:</label><br>
+        <textarea id="comentario" name="comentario" rows="4" cols="40"></textarea><br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+</div>
+
+</body>
+</html>
