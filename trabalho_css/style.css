@@ -1,0 +1,210 @@
+<style>
+
+	body {
+	background-image : url(matrix-code-purple-glitch-7bx7559lth2twmnk.gif);
+	color: white; 
+    font-family: "Inter", sans-serif
+    }
+
+	header {
+		background-color : black;
+		text-align: center;
+		font-family: "Anta", sans-serif;
+        border-radius: 13px;
+        font-size: large;
+    }
+
+    nav {
+        background-color: rgba(220, 95, 232, 0.9);
+        padding: 1px 20px;
+        border-radius: 13px;
+        margin-bottom: 15px;
+    }
+
+    nav ul {
+        font-family: "Anta", sans-serif;
+        background-color:#DC5FE8;
+        padding: 15px;
+        border-radius: 13px;
+        font-size: large;
+        display: flex;
+        justify-content: space-around;
+        list-style: none;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+    }
+
+    main section {
+        background-color : black;
+		border: 10px solid rgba(220, 95, 232, 0.5);
+		border-radius: 12px;
+		padding: 20px;
+		text-align: center;
+        margin-bottom: 15px;
+}
+
+#nomes {
+        background-color : black;
+		border: 10px solid rgba(220, 95, 232, 0.5);
+		border-radius: 12px;
+		padding: 20px;
+		text-align: center;
+        margin-bottom: 15px;
+    }
+
+    #acidentes {
+        background-color : black;
+		border: 10px solid rgba(220, 95, 232, 0.5);
+		border-radius: 12px;
+		padding: 20px;
+		text-align: center;
+        margin-bottom: 15px;
+    }
+
+    #dinheiro {
+        background-color : black;
+		border: 10px solid rgba(220, 95, 232, 0.5);
+		border-radius: 12px;
+		padding: 20px;
+		text-align: center;
+        margin-bottom: 15px;
+    }
+
+    #aleatorio {
+        background-color : black;
+		border: 10px solid rgba(220, 95, 232, 0.5);
+		border-radius: 12px;
+		padding: 20px;
+		text-align: center;
+        margin-bottom: 15px;
+    }
+	
+    #easter-eggs {
+        background-color : black;
+		border: 10px solid rgba(220, 95, 232, 0.5);
+		border-radius: 12px;
+		padding: 20px;
+		text-align: center;
+        margin-bottom: 15px;
+    }
+
+    #bugs-absurdos {
+        background-color : black;
+		border: 10px solid rgba(220, 95, 232, 0.5);
+		border-radius: 12px;
+		padding: 20px;
+		text-align: center;
+        margin-bottom: 15px;
+    }
+
+    #comandos-secretos {
+        background-color : black;
+		border: 10px solid rgba(220, 95, 232, 0.5);
+		border-radius: 12px;
+		padding: 20px;
+		text-align: center;
+        margin-bottom: 15px;
+    }
+
+    form {
+        margin-top: 15px;
+}
+
+   fieldset {
+        border: 2px solid rgba(220,95,232,0.5);
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    legend {
+        padding: 5px 10px;
+        font-family: "Anta", sans-serif;
+        color: #DC5FE8;
+    }
+
+    label {
+        display: block;
+        margin-top: 12px;
+    }
+
+    input, select, textarea {
+        width: 60%;
+        padding: 8px;
+        margin-top: 5px;
+        border-radius: 6px;
+        border: 1px solid #DC5FE8;
+        background-color: black;
+        color: white;
+        font-family: "Inter", sans-serif;
+    }
+
+    textarea {
+        min-height: 80px;
+    }
+
+    input[type="submit"] {
+        margin-top: 15px;
+        background-color: #DC5FE8;
+        border: none;
+        padding: 10px 18px;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 6px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #b84ac4;
+    }
+
+    section {
+        background-color: black;
+        border: 10px solid rgba(220, 95, 232, 0.5);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 15px;
+        width: 98%;
+}
+        
+    table {
+        width: 70%;
+        margin: 25px auto;
+        border-collapse: collapse;
+        background-color: black;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    th {
+        background-color: rgba(220,95,232,0.5);
+        color: white;
+        padding: 12px;
+        text-align: left;
+    }
+
+    td {
+        padding: 12px;
+        border-bottom: 1px solid rgba(220,95,232,0.5);
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(220,95,232,0.1);
+    }
+
+    tr:hover {
+        background-color: rgba(220,95,232,0.2);
+    }
+
+    footer {
+    text-align: center;
+    margin-top: 20px;
+    background-color: black;
+    border-radius: 13px;
+    display: block;
+    padding: 1px;
+}
+</style>
