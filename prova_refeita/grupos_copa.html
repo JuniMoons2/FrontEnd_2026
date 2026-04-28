@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos da Copa</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #1a3a6e;
+            background-image: radial-gradient(circle at 20% 50%, #0d2a56 0%, transparent 60%),
+                              radial-gradient(circle at 80% 20%, #2563ab 0%, transparent 50%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;               /* display flex */
+            align-items: center;         /* align-items */
+            justify-content: center;     /* justify-content */
+            flex-direction: column;
+            padding: 30px 20px;          /* padding */
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-size: 2.4rem;
+            color: #ffffff;              /* color */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            color: #a8c4f0;
+            font-size: 1rem;
+            margin-top: 6px;
+        }
+
+        .btn-proximo {
+            display: block;
+            margin: 0 auto 30px auto;
+            padding: 12px 36px;          
+            background-color: #f5a623;   
+            color: #1a1a1a;             
+            border: none;                
+            border-radius: 30px;         
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn-proximo:hover {
+            background-color: #e09410;
+            transform: scale(1.05);
+        }
+
+        .grupos-container {
+            display: flex;               
+            flex-wrap: wrap;
+            align-items: flex-start;     
+            justify-content: center;     
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: #ffffff;   
+            border: 2px solid #d0e1f9;   
+            border-radius: 16px;         
+            padding: 24px;               
+            width: 300px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 32px rgba(0,0,0,0.35);
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            color: #1a3a6e;             
+            border-bottom: 2px solid #1a3a6e; 
+            padding-bottom: 8px;         
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;                  
+        }
+
+        .card ul li {
+            background-color: #eef4ff;   
+            border-radius: 8px;         
+            border-left: 4px solid #1a3a6e; 
+            padding: 8px 12px;           
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+            color: #1a1a1a;              
+        }
+
+        details {
+            margin-top: 14px;
+            border: 1px solid #d0e1f9;   
+            border-radius: 10px;         
+            padding: 0;                  
+            overflow: hidden;
+        }
+
+        details summary {
+            background-color: #1a3a6e;  
+            color: #ffffff;             
+            padding: 8px 14px;           
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 8px;         
+            list-style: none;
+            display: flex;              
+            align-items: center;         
+            justify-content: space-between; 
+        }
+
+        details summary::after {
+            content: '▼';
+            font-size: 0.7rem;
+            transition: transform 0.2s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(-180deg);
+        }
+
+        details p {
+            padding: 12px 14px;         
+            font-size: 0.88rem;
+            color: #333;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>⚽ Grupos da Copa</h1>
+        <p>Fase de grupos — Selecione a rodada</p>
+    </header>
+
+    <button class="btn-proximo" onclick="alternarGrupos()">Próximo ›</button>
+
+    <!-- Conjunto 1: Grupos A, B, C (visível por padrão) -->
+    <div id="grupos-abc" class="grupos-container">
+
+        <div id="grupo-a" class="card">
+            <h2>🅰️ Grupo A</h2>
+            <h3>Seleções</h3>
+            <ul>
+                <li>México</li>
+                <li>África do Sul</li>
+                <li>Coreia do Sul</li>
+                <li>República Tcheca</li>
+            </ul>
+            <details>
+                <summary>Saiba Mais</summary>
+                <p>O jogo de abertura será México x África do Sul. Confrontos entre Coreia do Sul
+                   e seleções europeias já ocorreram em várias Copas, com histórico equilibrado.</p>
+            </details>
+        </div>
+
+        <div id="grupo-b" class="card">
+            <h2>🅱️ Grupo B</h2>
+            <h3>Seleções</h3>
+            <ul>
+                <li>Canadá</li>
+                <li>Suíça</li>
+                <li>Catar</li>
+                <li>Vaga Europeia (Bósnia)</li>
+            </ul>
+            <details>
+                <summary>Saiba Mais</summary>
+                <p>O Canadá joga em casa, fator importante de desempenho. Catar e Suíça já se
+                   enfrentaram recentemente em amistosos internacionais.</p>
+            </details>
+        </div>
+
+        <div id="grupo-c" class="card">
+            <h2>🅲 Grupo C</h2>
+            <h3>Seleções</h3>
+            <ul>
+                <li>Brasil</li>
+                <li>Marrocos</li>
+                <li>Haiti</li>
+                <li>Escócia</li>
+            </ul>
+            <details>
+                <summary>Saiba Mais</summary>
+                <p>Brasil, Marrocos e Escócia já dividiram grupo em 1998. Brasil nunca perdeu
+                   para a Escócia em Copas.</p>
+            </details>
+        </div>
+
+    </div><!-- #grupos-abc -->
+
+    <!-- Conjunto 2: Grupos D, E, F (oculto por padrão) -->
+    <div id="grupos-def" class="grupos-container" style="display: none;">
+
+        <div id="grupo-d" class="card">
+            <h2>🅳 Grupo D</h2>
+            <h3>Seleções</h3>
+            <ul>
+                <li>Estados Unidos</li>
+                <li>Paraguai</li>
+                <li>Austrália</li>
+                <li>Turquia</li>
+            </ul>
+            <details>
+                <summary>Saiba Mais</summary>
+                <p>Os EUA jogam em casa, vantagem histórica em Copas. Austrália enfrenta
+                   frequentemente seleções sul-americanas em torneios.</p>
+            </details>
+        </div>
+
+        <div id="grupo-e" class="card">
+            <h2>🅴 Grupo E</h2>
+            <h3>Seleções</h3>
+            <ul>
+                <li>Alemanha</li>
+                <li>Equador</li>
+                <li>Costa do Marfim</li>
+                <li>Curaçao</li>
+            </ul>
+            <details>
+                <summary>Saiba Mais</summary>
+                <p>Alemanha costuma dominar fases de grupos. Equador e Costa do Marfim têm
+                   estilos físicos semelhantes.</p>
+            </details>
+        </div>
+
+        <div id="grupo-f" class="card">
+            <h2>🅵 Grupo F</h2>
+            <h3>Seleções</h3>
+            <ul>
+                <li>Holanda</li>
+                <li>Japão</li>
+                <li>Tunísia</li>
+                <li>Suécia</li>
+            </ul>
+            <details>
+                <summary>Saiba Mais</summary>
+                <p>Brasil, Marrocos e Escócia já dividiram grupo em 1998. Brasil nunca perdeu
+                   para a Escócia em Copas.</p>
+            </details>
+        </div>
+
+    </div><!-- #grupos-def -->
+
+
+    <!-- =============================================
+         QUESTÃO 03 — JavaScript
+         Botão "Próximo" alterna entre os dois conjuntos
+         de grupos mantendo estilos e organização
+    ============================================= -->
+    <script>
+        // Guarda qual conjunto está visível no momento
+        let exibindoABC = true;
+
+        function alternarGrupos() {
+            const gruposABC = document.getElementById('grupos-abc');
+            const gruposDEF = document.getElementById('grupos-def');
+            const botao    = document.querySelector('.btn-proximo');
+
+            if (exibindoABC) {
+                // Esconde A/B/C e mostra D/E/F
+                gruposABC.style.display = 'none';
+                gruposDEF.style.display = 'flex';
+                botao.textContent = '‹ Anterior';
+            } else {
+                // Volta para A/B/C
+                gruposDEF.style.display = 'none';
+                gruposABC.style.display = 'flex';
+                botao.textContent = 'Próximo ›';
+            }
+
+            // Inverte o estado
+            exibindoABC = !exibindoABC;
+        }
+    </script>
+
+</body>
+</html>
