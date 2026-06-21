@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Termo</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: sans-serif;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    letter-spacing: 4px;
+  }
+
+  .board {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 20px;
+  }
+
+  .row {
+    display: flex;
+    gap: 5px;
+  }
+
+  .tile {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .tile.correct {
+    background: #6aaa64;
+    border-color: #6aaa64;
+    color: white;
+  }
+
+  .tile.present {
+    background: #c9b458;
+    border-color: #c9b458;
+    color: white;
+  }
+
+  .tile.absent {
+    background: #787c7c;
+    border-color: #787c7c;
+    color: white;
+  }
+
+  .message {
+    font-size: 18px;
+    font-weight: bold;
+    min-height: 24px;
+    margin-bottom: 10px;
+  }
+
+  input {
+    font-size: 18px;
+    text-transform: uppercase;
+    padding: 8px;
+    width: 150px;
+    text-align: center;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 8px 16px;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const PALAVRAS = ["TERMO", "BRISA", "FORTE", "NUVEM", "LIVRO", "MOEDA", "PORTA", "GATOS"];
+    const TAMANHO = 5;
+    const TENTATIVAS = 6;
+
+    function sortearPalavra() {
+      return PALAVRAS[Math.floor(Math.random() * PALAVRAS.length)];
+    }
+
+    function avaliarTentativa(tentativa, palavra) {
+      return tentativa.split("").map((letra, i) => {
+        if (letra === palavra[i]) return "correct";
+        if (palavra.includes(letra)) return "present";
+        return "absent";
+      });
+    }
+
+    function Tile({ letra, status }) {
+      return <div className={`tile ${status || ""}`}>{letra}</div>;
+    }
+
+    function Row({ tentativa, palavra }) {
+      const status = palavra ? avaliarTentativa(tentativa, palavra) : [];
+      const letras = tentativa.padEnd(TAMANHO).split("");
+      return (
+        <div className="row">
+          {letras.map((letra, i) => (
+            <Tile key={i} letra={letra.trim()} status={status[i]} />
+          ))}
+        </div>
+      );
+    }
+
+    function Board({ tentativas, palavra }) {
+      const linhasVazias = TENTATIVAS - tentativas.length;
+      return (
+        <div className="board">
+          {tentativas.map((tentativa, i) => (
+            <Row key={i} tentativa={tentativa} palavra={palavra} />
+          ))}
+          {Array.from({ length: linhasVazias }).map((_, i) => (
+            <Row key={"vazia-" + i} tentativa="" palavra={null} />
+          ))}
+        </div>
+      );
+    }
+
+    function Game() {
+      const [palavra, setPalavra] = useState(sortearPalavra());
+      const [tentativas, setTentativas] = useState([]);
+      const [atual, setAtual] = useState("");
+      const [mensagem, setMensagem] = useState("");
+      const [fim, setFim] = useState(false);
+
+      function reiniciar() {
+        setPalavra(sortearPalavra());
+        setTentativas([]);
+        setAtual("");
+        setMensagem("");
+        setFim(false);
+      }
+
+      function enviarTentativa() {
+        if (fim) return;
+        if (atual.length !== TAMANHO) {
+          setMensagem(`A palavra precisa ter ${TAMANHO} letras.`);
+          return;
+        }
+        const novaTentativa = atual.toUpperCase();
+        const novasTentativas = [...tentativas, novaTentativa];
+        setTentativas(novasTentativas);
+        setAtual("");
+
+        if (novaTentativa === palavra) {
+          setMensagem("Você acertou! 🎉");
+          setFim(true);
+        } else if (novasTentativas.length === TENTATIVAS) {
+          setMensagem(`Você perdeu! A palavra era ${palavra}.`);
+          setFim(true);
+        } else {
+          setMensagem("");
+        }
+      }
+
+      return (
+        <>
+          <h1>Termo</h1>
+          <Board tentativas={tentativas} palavra={palavra} />
+          <div className="message">{mensagem}</div>
+          <div>
+            <input
+              value={atual}
+              maxLength={TAMANHO}
+              disabled={fim}
+              onChange={(e) => setAtual(e.target.value.toUpperCase())}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") enviarTentativa();
+              }}
+            />
+            <button onClick={enviarTentativa} disabled={fim}>
+              Enviar
+            </button>
+            <button onClick={reiniciar}>Reiniciar</button>
+          </div>
+        </>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(
+      <React.StrictMode>
+        <Game />
+      </React.StrictMode>
+    );
+  </script>
+</body>
+</html>
