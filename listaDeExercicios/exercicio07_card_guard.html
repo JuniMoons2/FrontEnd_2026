@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Card Guard - Infinity Bank</title>
+<style>
+  body { font-family: sans-serif; max-width: 420px; margin: 50px auto; text-align: center; }
+  input { font-size: 16px; padding: 10px; width: 80%; text-align: center; letter-spacing: 2px; }
+  button { font-size: 16px; padding: 10px 20px; margin-top: 15px; cursor: pointer; }
+  #painel { margin-top: 25px; text-align: left; padding: 15px; border-radius: 6px; }
+  #painel p { margin: 6px 0; }
+  .valido { background: #d1f5e0; color: #0f6b32; }
+  .invalido { background: #ffe0e0; color: #b30000; }
+</style>
+</head>
+<body>
+  <h1>Card Guard</h1>
+  <p>Análise de cartões - Infinity Bank</p>
+
+  <input type="text" id="cartaoInput" placeholder="Número do cartão" maxlength="19">
+  <br>
+  <button id="btnAnalisar">Analisar Cartão</button>
+
+  <div id="painel" style="display:none;">
+    <p><strong>Status:</strong> <span id="resStatus"></span></p>
+    <p><strong>Bandeira:</strong> <span id="resBandeira"></span></p>
+    <p><strong>Categoria de Setor:</strong> <span id="resCategoria"></span></p>
+    <p><strong>Banco Emissor:</strong> <span id="resBanco"></span></p>
+  </div>
+
+  <script>
+    function luhnValido(numero) {
+      const digitos = numero.split("").reverse().map(Number);
+      let soma = 0;
+
+      for (let i = 0; i < digitos.length; i++) {
+        let valor = digitos[i];
+        if (i % 2 !== 0) { // posições pares na ordem original = ímpares no array invertido (índice 0-based)
+          valor *= 2;
+          if (valor > 9) valor -= 9;
+        }
+        soma += valor;
+      }
+
+      return soma % 10 === 0;
+    }
+
+    function identificarBandeira(numero) {
+      if (/^4/.test(numero)) return "Visa";
+      if (/^5[1-5]/.test(numero) || /^2(2[2-9][1-9]|[3-6]\d{2}|7[01]\d|720)/.test(numero)) return "Mastercard";
+      if (/^3[47]/.test(numero)) return "American Express";
+      if (/^6(011|5)/.test(numero)) return "Discover";
+      if (/^(4011|4312|4389|4514|4573|6362|5041|6504|6505|6506|6509)/.test(numero)) return "Elo";
+      return "Bandeira não identificada";
+    }
+
+    function identificarCategoriaSetor(primeiroDigito) {
+      const categorias = {
+        "0": "ISO/TC 68 - Uso futuro",
+        "1": "Companhias Aéreas",
+        "2": "Companhias Aéreas / Setor diverso",
+        "3": "Viagens e Entretenimento (ex: Amex, Diners)",
+        "4": "Bancário e Financeiro (ex: Visa)",
+        "5": "Bancário e Financeiro (ex: Mastercard)",
+        "6": "Comércio / Bancário (ex: Discover)",
+        "7": "Petróleo",
+        "8": "Telecomunicações",
+        "9": "Atribuição Nacional"
+      };
+      return categorias[primeiroDigito] || "Categoria desconhecida";
+    }
+
+    document.getElementById("btnAnalisar").addEventListener("click", () => {
+      let numero = document.getElementById("cartaoInput").value;
+      numero = numero.replace(/[\s.\-]/g, "");
+
+      const painel = document.getElementById("painel");
+
+      if (!/^\d{13,16}$/.test(numero)) {
+        painel.style.display = "block";
+        painel.className = "invalido";
+        document.getElementById("resStatus").textContent = "Inválido (precisa ter entre 13 e 16 dígitos numéricos)";
+        document.getElementById("resBandeira").textContent = "-";
+        document.getElementById("resCategoria").textContent = "-";
+        document.getElementById("resBanco").textContent = "-";
+        return;
+      }
+
+      const valido = luhnValido(numero);
+      const bandeira = identificarBandeira(numero);
+      const categoria = identificarCategoriaSetor(numero[0]);
+
+      painel.style.display = "block";
+      painel.className = valido ? "valido" : "invalido";
+      document.getElementById("resStatus").textContent = valido ? "Válido ✅" : "Inválido ❌ (falhou no algoritmo de Luhn)";
+      document.getElementById("resBandeira").textContent = bandeira;
+      document.getElementById("resCategoria").textContent = categoria;
+      document.getElementById("resBanco").textContent = "Identificação do banco emissor exige consulta a uma base BIN/IIN externa (não incluída neste exemplo).";
+    });
+  </script>
+</body>
+</html>

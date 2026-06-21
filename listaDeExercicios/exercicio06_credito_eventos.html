@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Infinity Bank - Crédito para Eventos</title>
+<style>
+  body { font-family: sans-serif; max-width: 420px; margin: 50px auto; text-align: center; }
+  .campo { margin: 15px 0; text-align: left; }
+  label { display: block; margin-bottom: 5px; font-weight: bold; }
+  input, select { font-size: 16px; padding: 8px; width: 100%; box-sizing: border-box; }
+  button { font-size: 16px; padding: 10px 20px; margin-top: 15px; cursor: pointer; }
+  #resultado { margin-top: 25px; text-align: left; padding: 15px; background: #f0f2f5; border-radius: 6px; }
+  #resultado p { margin: 6px 0; }
+</style>
+</head>
+<body>
+  <h1>Infinity Bank</h1>
+  <h3>Crédito para Festas & Eventos</h3>
+
+  <div class="campo">
+    <label for="pacote">Pacote</label>
+    <select id="pacote">
+      <option value="standard">Standard - R$ 50,00/pessoa</option>
+      <option value="premium">Premium - R$ 80,00/pessoa</option>
+      <option value="deluxe">Infinity Deluxe - R$ 120,00/pessoa</option>
+    </select>
+  </div>
+
+  <div class="campo">
+    <label for="pessoas">Quantidade de pessoas</label>
+    <input type="number" id="pessoas" min="1" value="1">
+  </div>
+
+  <button id="btnCalcular">Calcular Orçamento</button>
+
+  <div id="resultado" style="display:none;">
+    <p><strong>Custo bruto:</strong> <span id="resBruto"></span></p>
+    <p><strong>Taxa de serviço (10%):</strong> <span id="resTaxa"></span></p>
+    <p><strong>Desconto fidelidade:</strong> <span id="resDesconto"></span></p>
+    <p><strong>Total final:</strong> <span id="resTotal"></span></p>
+  </div>
+
+  <script>
+    document.getElementById("btnCalcular").addEventListener("click", () => {
+      const pacote = document.getElementById("pacote").value;
+      const pessoas = Number(document.getElementById("pessoas").value) || 0;
+
+      let valorPorPessoa;
+      switch (pacote) {
+        case "standard":
+          valorPorPessoa = 50;
+          break;
+        case "premium":
+          valorPorPessoa = 80;
+          break;
+        case "deluxe":
+          valorPorPessoa = 120;
+          break;
+        default:
+          valorPorPessoa = 0;
+      }
+
+      const custoBruto = valorPorPessoa * pessoas;
+      const taxaServico = custoBruto * 0.10;
+      let subtotal = custoBruto + taxaServico;
+
+      let desconto = 0;
+      if (pessoas > 100) {
+        desconto = subtotal * 0.05;
+      }
+
+      const total = subtotal - desconto;
+
+      document.getElementById("resBruto").textContent = `R$ ${custoBruto.toFixed(2)}`;
+      document.getElementById("resTaxa").textContent = `R$ ${taxaServico.toFixed(2)}`;
+      document.getElementById("resDesconto").textContent = desconto > 0
+        ? `- R$ ${desconto.toFixed(2)} (mais de 100 convidados)`
+        : "Não aplicável";
+      document.getElementById("resTotal").textContent = `R$ ${total.toFixed(2)}`;
+
+      document.getElementById("resultado").style.display = "block";
+    });
+  </script>
+</body>
+</html>

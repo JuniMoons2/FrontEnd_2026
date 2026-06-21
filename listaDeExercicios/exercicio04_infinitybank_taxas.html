@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Infinity Bank - Simulador de Taxas</title>
+<style>
+  body { font-family: sans-serif; max-width: 420px; margin: 50px auto; text-align: center; }
+  .campo { margin: 15px 0; text-align: left; }
+  label { display: block; margin-bottom: 5px; font-weight: bold; }
+  input, select { font-size: 16px; padding: 8px; width: 100%; box-sizing: border-box; }
+  button { font-size: 16px; padding: 10px 20px; margin-top: 15px; cursor: pointer; }
+  #resultado { margin-top: 25px; text-align: left; padding: 15px; background: #f0f2f5; border-radius: 6px; }
+  #resultado p { margin: 6px 0; }
+</style>
+</head>
+<body>
+  <h1>Infinity Bank</h1>
+  <h3>Simulador de Vendas</h3>
+
+  <div class="campo">
+    <label for="bandeira">Bandeira do cartão</label>
+    <select id="bandeira">
+      <option value="visa">Visa (2%)</option>
+      <option value="master">Master (1.85%)</option>
+      <option value="elo">Elo (3%)</option>
+    </select>
+  </div>
+
+  <div class="campo">
+    <label for="valor">Valor da venda (R$)</label>
+    <input type="number" id="valor" step="0.01">
+  </div>
+
+  <div class="campo">
+    <label for="parcelas">Número de parcelas</label>
+    <input type="number" id="parcelas" min="1" value="1">
+  </div>
+
+  <button id="btnCalcular">Calcular</button>
+
+  <div id="resultado" style="display:none;">
+    <p><strong>Taxa da bandeira:</strong> <span id="resTaxaBandeira"></span></p>
+    <p><strong>Juros (0,35% a.m.):</strong> <span id="resJuros"></span></p>
+    <p><strong>Taxa mensal (R$12,50/mês):</strong> <span id="resTaxaMensal"></span></p>
+    <p><strong>Valor total:</strong> <span id="resTotal"></span></p>
+    <p><strong>Valor de cada parcela:</strong> <span id="resParcela"></span></p>
+  </div>
+
+  <script>
+    document.getElementById("btnCalcular").addEventListener("click", () => {
+      const bandeira = document.getElementById("bandeira").value;
+      const valor = Number(document.getElementById("valor").value);
+      const parcelas = Number(document.getElementById("parcelas").value) || 1;
+
+      let percentualBandeira;
+      switch (bandeira) {
+        case "visa":
+          percentualBandeira = 0.02;
+          break;
+        case "master":
+          percentualBandeira = 0.0185;
+          break;
+        case "elo":
+          percentualBandeira = 0.03;
+          break;
+        default:
+          percentualBandeira = 0;
+      }
+
+      const taxaBandeira = valor * percentualBandeira;
+      const juros = valor * 0.0035 * parcelas; // 0,35% ao mês
+      const taxaMensal = 12.50 * parcelas;
+      const valorTotal = valor + taxaBandeira + juros + taxaMensal;
+      const valorParcela = valorTotal / parcelas;
+
+      document.getElementById("resTaxaBandeira").textContent = `R$ ${taxaBandeira.toFixed(2)}`;
+      document.getElementById("resJuros").textContent = `R$ ${juros.toFixed(2)}`;
+      document.getElementById("resTaxaMensal").textContent = `R$ ${taxaMensal.toFixed(2)}`;
+      document.getElementById("resTotal").textContent = `R$ ${valorTotal.toFixed(2)}`;
+      document.getElementById("resParcela").textContent = `R$ ${valorParcela.toFixed(2)} x ${parcelas}`;
+
+      document.getElementById("resultado").style.display = "block";
+    });
+  </script>
+</body>
+</html>

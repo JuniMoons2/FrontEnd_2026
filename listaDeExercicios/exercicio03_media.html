@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Média Escolar</title>
+<style>
+  body { font-family: sans-serif; max-width: 400px; margin: 50px auto; text-align: center; }
+  .campo { margin: 15px 0; text-align: left; }
+  label { display: block; margin-bottom: 5px; font-weight: bold; }
+  input { font-size: 16px; padding: 8px; width: 100%; box-sizing: border-box; }
+  button { font-size: 16px; padding: 10px 20px; margin-top: 15px; cursor: pointer; }
+  #resultado { margin-top: 25px; font-size: 18px; font-weight: bold; padding: 15px; border-radius: 6px; }
+  .aprovado { background: #d4edff; color: #084298; }
+  .exame { background: #d1f5e0; color: #0f6b32; }
+  .reprovado { background: #ffe0e0; color: #b30000; }
+</style>
+</head>
+<body>
+  <h1>Média Escolar</h1>
+
+  <div class="campo">
+    <label for="nome">Nome do aluno</label>
+    <input type="text" id="nome" placeholder="Digite o nome">
+  </div>
+  <div class="campo">
+    <label for="nota1">Nota 1</label>
+    <input type="number" id="nota1" step="0.1">
+  </div>
+  <div class="campo">
+    <label for="nota2">Nota 2</label>
+    <input type="number" id="nota2" step="0.1">
+  </div>
+  <div class="campo">
+    <label for="nota3">Nota 3</label>
+    <input type="number" id="nota3" step="0.1">
+  </div>
+
+  <button id="btnCalcular">Calcular Média</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    document.getElementById("btnCalcular").addEventListener("click", () => {
+      const nome = document.getElementById("nome").value.trim() || "Aluno";
+      const n1 = Number(document.getElementById("nota1").value);
+      const n2 = Number(document.getElementById("nota2").value);
+      const n3 = Number(document.getElementById("nota3").value);
+
+      const media = (n1 + n2 + n3) / 3;
+      const resultadoDiv = document.getElementById("resultado");
+
+      if (media >= 7.0 && media <= 10.0) {
+        resultadoDiv.className = "aprovado";
+        resultadoDiv.textContent = `${nome} está Aprovado! Média: ${media.toFixed(2)}`;
+      } else if (media >= 4.0 && media <= 6.9) {
+        const faltaPara10 = (10 - media).toFixed(2);
+        resultadoDiv.className = "exame";
+        resultadoDiv.textContent = `${nome} ficou de Exame. Média: ${media.toFixed(2)} (faltam ${faltaPara10} pontos para 10)`;
+      } else {
+        resultadoDiv.className = "reprovado";
+        resultadoDiv.textContent = `${nome} está Reprovado. Média: ${media.toFixed(2)}`;
+      }
+    });
+  </script>
+</body>
+</html>
